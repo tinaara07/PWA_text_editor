@@ -28,24 +28,15 @@ registerRoute(({ request }) => request.mode === 'navigate', pageCache);
 
 // Caching for static assets (CSS, JS, images, etc.)
 registerRoute(
-  ({ request }) => {
-    return (
-      request.destination === 'style' || // CSS files
-      request.destination === 'script' || // JS files
-      request.destination === 'image' // Images
-    );
-  },
-  new CacheFirst({
+  ({ request }) => ['style', 'script', 'image'].includes(request.destination),
+  new StaleWhileRevalidate({
     cacheName: 'asset-cache',
     plugins: [
       new CacheableResponsePlugin({
-        statuses: [0, 200], // Cache responses with these status codes
-      }),
-      new ExpirationPlugin({
-        maxAgeSeconds: 30 * 24 * 60 * 60, // Cache for 30 days
-        maxEntries: 50, // Maximum number of entries in the cache
+        statuses: [0, 200],
       }),
     ],
   })
 );
+
 registerRoute();

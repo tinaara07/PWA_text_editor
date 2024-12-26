@@ -17,8 +17,9 @@ module.exports = () => {
     plugins: [
       // Generate HTML file
       new HtmlWebpackPlugin({
-        template: './src/index.html',
+        template: './index.html',
         filename: 'index.html',
+        title:'Text Editor',
       }),
       // Inject the custom service worker
       new InjectManifest({
@@ -27,20 +28,21 @@ module.exports = () => {
       }),
       // Configure PWA manifest
       new WebpackPwaManifest({
-        name: 'Your App Name',
-        short_name: 'App',
-        description: 'Your app description',
-        background_color: '#ffffff',
-        theme_color: '#317EFB',
+        name: 'Just Another Text Editor',
+        short_name: 'J.A.T.E',
+        description: 'Takes note with JavaScript syntax highlighting',
+        background_color: '#225ca3',
+        theme_color: '#225ca3',
+        start_url: './',
         display: 'standalone',
         orientation: 'portrait',
         start_url: '.',
         publicPath: '/',
         icons: [
           {
-            src: path.resolve('src/images/icon-192x192.png'),
-            sizes: [192, 512], // multiple sizes
-            destination: path.join('icons'),
+            src: path.resolve('src/images/logo.png'),
+            sizes: [96, 128, 192, 256, 384, 512], // multiple sizes
+            destination: path.join('assets','icons'),
           },
         ],
       }),
