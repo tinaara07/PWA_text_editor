@@ -28,6 +28,7 @@ module.exports = () => {
       }),
       // Configure PWA manifest
       new WebpackPwaManifest({
+        fingerprints: false,
         name: 'Just Another Text Editor',
         short_name: 'J.A.T.E',
         description: 'Takes note with JavaScript syntax highlighting',
